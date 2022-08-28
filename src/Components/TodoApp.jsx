@@ -6,14 +6,27 @@ const TodoApp = () => {
     const [todoS,setTodoS]=useState([]);
 
     const addTodoHandler=(inputText)=>{
-        const newTodo={id:Math.floor(Math.random())*10, Text:inputText, isCompelted:false}
+        const newTodo={id:Math.floor(Math.random()*100), Text:inputText, isCompleted:false}
         setTodoS([...todoS,newTodo])
+    }
+    
+    const completedHandler=(enterId)=>{
+        const cloneTodoS=[...todoS];
+        const selectedCompleted=cloneTodoS.filter((T)=>T.id===enterId)
+        selectedCompleted[0].isCompleted=!selectedCompleted[0].isCompleted;
+        setTodoS(cloneTodoS)
+    }
+
+    const onRemoveTodo=(enterId)=>{
+        const cloneTodoS=[...todoS];
+        const selecteTodosRemove=cloneTodoS.filter((T)=>T.id!==enterId);
+        setTodoS(selecteTodosRemove);
     }
     
     return ( 
         <div>
             <TodoForm addTodoHandler={addTodoHandler}/>
-            <TodoList todoS={todoS}/>
+            <TodoList todoS={todoS} onCompleted={completedHandler} onDeleteTodo={onRemoveTodo}/>
         </div>
      );
 }
