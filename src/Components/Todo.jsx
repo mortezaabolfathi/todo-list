@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Todo = ({todo}) => {
+const Todo = ({todo,onCompleted}) => {
  
        return (
         <>
@@ -9,7 +9,7 @@ const Todo = ({todo}) => {
           </div>
           <div>
             <button>Edit</button>
-            <button>Completed</button>
+            <button onClick={onCompleted}>{todo.isCompleted ? "Completed" : "Done :)"}</button>
           </div>
         </>
       );
