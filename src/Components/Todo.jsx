@@ -1,3 +1,4 @@
+// at focus in line 30 at component todo list in component can`t help me
 import React from 'react';
 
 const Todo = ({todo,onCompleted, onDeleteTodo, onEditTodo}) => {
