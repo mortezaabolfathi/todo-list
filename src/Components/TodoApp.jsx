@@ -20,17 +20,18 @@ const TodoApp = () => {
     setTodoS([...todoS, newTodo]);
   };
 
+  
+  const onRemoveTodo = (enterId) => {
+    const cloneTodoS = [...todoS];
+    const selectedTodoSRemove = cloneTodoS.filter((T) => T.id !== enterId);
+    setTodoS(selectedTodoSRemove);
+  };
+  
   const completedHandler = (enterId) => {
     const cloneTodoS = [...todoS];
     const selectedCompleted = cloneTodoS.filter((T) => T.id === enterId);
     selectedCompleted[0].isCompleted = !selectedCompleted[0].isCompleted;
     setTodoS(cloneTodoS);
-  };
-
-  const onRemoveTodo = (enterId) => {
-    const cloneTodoS = [...todoS];
-    const selectedTodoSRemove = cloneTodoS.filter((T) => T.id !== enterId);
-    setTodoS(selectedTodoSRemove);
   };
 
   const updateTodo = (enterId, newValue) => {
@@ -64,6 +65,7 @@ const TodoApp = () => {
       />
 
       <TodoForm submitTodo={addTodo} />
+      
       <TodoList
         todoS={filterTodoSelected}
         onCompleted={completedHandler}
