@@ -1,17 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
-
-
 const TodoForm = (props) => {
+  const inputRef = useRef(null);
 
-      const inputRef=useRef(null);
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
-      useEffect(()=>{
-        inputRef.current.focus()
-      },[])
-  
-  
-      const [inputText, setInputText] = useState();
+  const [inputText, setInputText] = useState();
 
   const changeHandler = (e) => {
     setInputText(e.target.value);
@@ -29,33 +25,16 @@ const TodoForm = (props) => {
 
   return (
     <>
-      {props.edit ? (
-        <>
-          <form action="" onSubmit={submithandler}>
-            <input
-              type="text"
-              value={inputText}
-              onChange={(e) => changeHandler(e)}
-              placeholder="update todo...."
-              ref={inputRef}
-            />
-            <button type="submit"> Update </button>
-          </form>
-        </>
-      ) : (
-        <>
-          <form action="" onSubmit={submithandler}>
-            <input
-              type="text"
-              value={inputText}
-              onChange={(e) => changeHandler(e)}
-              placeholder="add Todo...."
-              ref={inputRef}
-            />
-            <button type="submit"> ADD </button>
-          </form>
-        </>
-      )}
+      <form action="" onSubmit={submithandler}>
+        <input
+          type="text"
+          value={inputText}
+          onChange={(e) => changeHandler(e)}
+          placeholder={props.edit ? props.edit.Text: "add Todo..."}
+          ref={inputRef}
+        />
+        <button type="submit"> {props.edit ? "Update" : "add"} </button>
+      </form>
     </>
   );
 };
